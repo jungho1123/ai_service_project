@@ -1,0 +1,37 @@
+ai_service_project/
+├── app/                        # FastAPI 서버 코드 전체
+│   ├── api/                    # FastAPI 라우팅(API 엔드포인트) 담당
+│   │   ├── predict.py           # 이미지 업로드로 약 예측 API
+│   │   ├── pill_info.py         # class_id로 약 상세정보 조회 API
+│   │   └── search.py            # 약 이름으로 검색하는 API
+│   ├── core/                   # 서버 핵심 설정 (DB 연결 등)
+│   │   ├── database.py          # SQLAlchemy DB 연결, 세션 관리
+│   │   └── config.py            # 환경변수(.env) 설정 불러오기
+│   ├── models/                 # DB 테이블 ORM 모델 정의
+│   │   └── pill.py              # Pill 테이블 (약 기본정보 저장)
+│   ├── services/               # 비즈니스 로직 처리 계층
+│   │   ├── predict_service.py   # 이미지로 class_id 예측 서비스
+│   │   ├── pill_service.py      # class_id로 pill 정보 조회 서비스
+│   │   └── external_api.py      # 공공데이터 API 조회 + fallback 조회
+│   ├── scripts/                # 초기화 및 관리 스크립트
+│   │   ├── create_tables.py     # DB 테이블 생성 스크립트
+│   │   ├── init_db.py           # fallback json 데이터로 pill 테이블 채우기
+│   ├── static/                 # 정적 파일 저장 (기본 약 이미지 등)
+│   │   └── default-pill.png     # 약 이미지를 찾을 수 없을 때 기본 이미지
+│   └── main.py                 # FastAPI 앱 생성, 엔드포인트 연결, 서버 실행
+├── model/                      # 딥러닝 모델 및 학습 코드
+│   ├── best_model.pth           # EfficientNet 학습된 모델 파라미터 파일
+│   └── train.py                 # 딥러닝 모델 학습용 코드
+├── utils/                      # 학습에 필요한 유틸리티 함수 모음
+│   ├── training_loop.py         # 학습 반복(에포크) 루프 정의
+│   ├── model_setup.py           # EfficientNet 모델 설정 함수
+│   └── data_loader.py           # 데이터셋 로더 함수
+├── data/                       # JSON 기반 매핑 파일 (모델 출력 ↔ 약품정보 매칭)
+│   ├── class_idx_to_id.json     # 모델 인덱스 → 약품 class_id 매핑
+│   ├── classid_to_itemseq.json  # 약품 class_id → 공공데이터 item_seq 매핑
+├── notebook/                   # Jupyter 실험용 노트북 파일 (EDA, 테스트)
+├── scripts/                    # 기타 관리/운영용 스크립트
+├── flutter_application_1/      # Flutter 프론트엔드 코드 (모바일 앱)
+├── .env                         # 서버 환경변수 파일 (DB URL, API 키 저장)
+├── requirements.txt             # Python 패키지 설치 목록
+└── README.md                    # 프로젝트 설명서
