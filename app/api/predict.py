@@ -18,7 +18,7 @@ async def predict(file: UploadFile = File(...)):  # POST 메소드로 파일 업
     img_bytes = await file.read()  # 업로드된 파일을 비동기적으로 읽어 바이트 데이터로 변환
     
     # predict_service를 통해 이미지 데이터를 모델에 입력하여 class_id 예측 및 신뢰도(confidence) 계산
-    class_id, conf = predict_service.predict(img_bytes, threshold=0.5)
+    class_id, conf = predict_service.predict(img_bytes, threshold=0.7)
 
     if not class_id:
         # 모델이 자신 있게 예측하지 못한 경우, 사용자에게 검색을 추천하는 메시지 반환

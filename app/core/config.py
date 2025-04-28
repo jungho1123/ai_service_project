@@ -1,7 +1,8 @@
 from functools import lru_cache  # 결과를 캐시하여 성능을 최적화하는 데코레이터 가져오기
-from pydantic import BaseSettings, AnyHttpUrl  # 환경 설정 및 URL 타입 검증을 위한 모듈 가져오기
+from pydantic_settings import BaseSettings  # BaseSettings는 pydantic-settings 패키지로 분리됨
+from pydantic import AnyHttpUrl  # URL 타입 검증을 위한 모듈 가져오기
 
-class Settings(BaseSettings):  # Pydantic의 BaseSettings를 상속하여 환경변수 기반 설정 클래스 정의
+class Settings(BaseSettings):  # pydantic-settings의 BaseSettings를 상속하여 환경변수 기반 설정 클래스 정의
     DATABASE_URL: str  # 데이터베이스 연결 문자열 (필수)
     API_SERVICE_KEY: str  # 공공데이터 API 서비스 키 (필수)
     FALLBACK_LABEL_PATH: str = ""  # fallback용 JSON 파일 경로 (기본값 빈 문자열)
