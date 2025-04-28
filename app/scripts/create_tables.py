@@ -1,11 +1,12 @@
 # app/scripts/create_tables.py
-from app.core.database import Base, engine
-from app.models.pill import Pill
 
-def init_db():
-    print("  Creating tables")
-    Base.metadata.create_all(bind=engine)
-    print("  Done.")
+from app.core.database import Base, engine  # 데이터베이스 Base 클래스와 엔진 객체 임포트
+from app.models.pill import Pill  # Pill 테이블 ORM 모델 임포트
 
-if __name__ == "__main__":
-    init_db()
+def init_db():  # 데이터베이스 테이블을 생성하는 함수 정의
+    print("  Creating tables")  # 테이블 생성 시작 로그 출력
+    Base.metadata.create_all(bind=engine)  # Base 클래스에 등록된 모든 테이블을 데이터베이스에 생성
+    print("  Done.")  # 테이블 생성 완료 로그 출력
+
+if __name__ == "__main__":  # 스크립트 단독 실행 시 아래 코드 실행
+    init_db()  # 데이터베이스 초기화 함수 호출
