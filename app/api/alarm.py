@@ -30,3 +30,8 @@ def create_alarm(payload: AlarmCreate, db: Session = Depends(get_db), user: User
     db.add(alarm)
     db.commit()
     return {"message": "복약 알림이 등록되었습니다."}
+
+@router.get("")
+def get_alarms(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+    alarms = db.query(Alarm).filter(Alarm.user_id == user.id).all()
+    return alarms
