@@ -8,7 +8,7 @@ from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.core.config import get_settings
-from app.api import predict, pill_info, search, auth  # auth 라우터 추가
+from app.api import predict, pill_info, search, auth ,alarm # auth 라우터 추가
 
 settings = get_settings()
 app = FastAPI(title="Pill-Info Service")
@@ -26,7 +26,7 @@ app.add_middleware(
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 # ────────────────────────────── API 라우터 등록
-for r in (predict.router, pill_info.router, search.router, auth.router):
+for r in (predict.router, pill_info.router, search.router, auth.router,alarm.router):
     app.include_router(r)
 
 # ────────────────────────────── 글로벌 에러 핸들러 등록
